@@ -2,6 +2,8 @@
 class recipe(object):
     def __init__(self):
         self.RecipeDict = dict()
+        self.Recipename = str()
+        self.subrecipes = list()
 
     def checkhaskey(self,key):
        if key in self.RecipeDict.keys():
@@ -21,3 +23,13 @@ class recipe(object):
 
     def readfromrecipe(self,key):
      return self.RecipeDict[key]
+   
+    def setrecipename(self,name):
+       self.Recipename = name
+
+
+   
+    def addsubrecipe(self,subrecipename):
+       newrecipe = recipe()
+       newrecipe.setrecipename(subrecipename)
+       self.subrecipes.append(newrecipe)
