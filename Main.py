@@ -1,4 +1,5 @@
 #import recipeobject as ro
+import RecipeListdicttest as rl
 #tester
 
 #recipe = ro.recipe()
@@ -15,22 +16,12 @@
 
 #print(recipe.readfromrecipe("test"))
 #print(recipe.readfromrecipe(name))
-def isexit(userinput):
-    if userinput == "exit":
-        return True
-    elif  userinput == "Exit":
-            return True
-    elif  userinput == "EXIT":
-        return True
-    elif  userinput == "E":
-        return True
-    elif  userinput == "e":
-        return True
-    else:
-     return False
+testobj = rl.recipelistdict.recipe()
+testlst = rl.recipelistdict()
 
+testobj.setrecipename("test")
+testobj.addtorecipe("test",100)
 
-userinput = str()
+testlst.addrecipe(testobj)
 
-while isexit(userinput) == False:
-    userinput = input("Enter your command: ")
+print(testlst.getrecipe("test"))
