@@ -1,5 +1,5 @@
 #import recipeobject as ro
-import RecipeListdicttest as rl
+import RecipeListdict as rl
 #tester
 
 #recipe = ro.recipe()
@@ -19,9 +19,17 @@ import RecipeListdicttest as rl
 testobj = rl.recipelistdict.recipe()
 testlst = rl.recipelistdict()
 
-testobj.setrecipename("test")
-testobj.addtorecipe("test",100)
 
+testobj.setrecipename("test")
+
+testobj.addtorecipe("test",100)
+testobj2 = rl.recipelistdict.recipe()
+testobj2.addtorecipe("test2",150)
+testobj2.setrecipename("test2")
+testobj.addsubrecipe(testobj2)
 testlst.addrecipe(testobj)
 
-print(testlst.getrecipe("test"))
+testobj3 = testlst.getrecipe("test")
+
+print(testobj3.tostring())
+testlst.listrecipes()

@@ -5,23 +5,27 @@ class recipelistdict(object):
         self.dict = dict()
         #create
     def addrecipe(self,recipe):
-        self.dict[recipe.recipename] = recipe
+        string = recipe.recipename
+        self.dict[string] = recipe
+        print(self.dict[string])
         #read
     def getrecipe(self,recipename):
-        return self.dict.get(recipename,"")
+        return self.dict.get(recipename,"no recipe found.")
 
         #update
           #get recipe of the same name
           #and delete it then readd it     
 
         #delete
-        def deleterecipe(self,recipename):
-            recipe = self.getrecipe(recipename)
-            self.dict.pop(recipe)
+    def deleterecipe(self,recipename):
+        recipe = self.getrecipe(recipename)
+        self.dict.pop(recipe)
 
-        def listrecipes(self):
-            for x in self.dict:
+    def listrecipes(self):
+        for x in self.dict:
+            if x != str():
                 print(x.recipename)
+            
 
     class recipe:
         def __init__(self):
@@ -53,7 +57,21 @@ class recipelistdict(object):
 
 
    
-        def addsubrecipe(self,subrecipename):
-            newrecipe = recipelistdict.recipe()
-            newrecipe.setrecipename(subrecipename)
-            self.subrecipes.append(newrecipe)
+        def addsubrecipe(self,subrecipe):
+            self.subrecipes.append(subrecipe)
+
+        def getsubrecipe(self,subrecipename):
+            for s in self.subrecipes:
+                if s.recipenam.equals(subrecipename):
+                    return s
+            return 0
+
+
+        def tostring(self):
+            for sub in self.subrecipes:
+                sub.tostring()
+            print("\n")
+            print(self.recipename)
+            print("___________________________")           
+            for key,val in self.RecipeDict.items():
+                print(key, "       ", val,"g")

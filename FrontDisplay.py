@@ -1,6 +1,23 @@
-import recipeobject as robject
-import RecipeList as rlist
+import RecipeListdict as rl
 
+print("")
+print("  _______ ")
+print(" /       )")
+print("/_____   | ")
+print("(  '   )/ ")
+print(" |.  '|/  ")
+print(" |____|/  ")
+print("Bakers Table")
+print("=============")
+
+def commandcheck(userinput):
+    if userinput == "view all":
+        print("viewing all")
+    elif userinput == "help":
+        print("viewing help")
+    elif userinput == "view regex for any exixting things":
+        print("viewing picked recipe")
+    
 
 def isexit(userinput):
     if userinput == "exit":
@@ -15,14 +32,10 @@ def isexit(userinput):
         return True
     else:
      return False
-
+    
 
 userinput = str()
 
-#while isexit(userinput) == False:
-  #  userinput = input("Enter your command: ")
-  #      commandcheck(userinput)
-
-
-#def commandcheck(self,userinput):
- #   if userinput == "view all":
+while isexit(userinput) == False:
+    userinput = input("Enter your command: ")
+    commandcheck(userinput)
