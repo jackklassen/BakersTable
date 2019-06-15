@@ -1,5 +1,6 @@
 #import recipeobject as ro
 import RecipeListdict as rl
+import UserHandler as uh
 #tester
 
 #recipe = ro.recipe()
@@ -16,20 +17,23 @@ import RecipeListdict as rl
 
 #print(recipe.readfromrecipe("test"))
 #print(recipe.readfromrecipe(name))
-testobj = rl.recipelistdict.recipe()
-testlst = rl.recipelistdict()
+#testobj = rl.recipelistdict.recipe()
+#testlst = rl.recipelistdict()
 
 
-testobj.setrecipename("test")
+#testobj.setrecipename("test")
 
-testobj.addtorecipe("test",100)
-testobj2 = rl.recipelistdict.recipe()
-testobj2.addtorecipe("test2",150)
-testobj2.setrecipename("test2")
-testobj.addsubrecipe(testobj2)
-testlst.addrecipe(testobj)
+#testobj.addtorecipe("test",100)
+#testobj2 = rl.recipelistdict.recipe()
+#testobj2.addtorecipe("test2",150)
+#testobj2.setrecipename("test2")
+#testobj.addsubrecipe(testobj2)
+#testlst.addrecipe(testobj)
 
-testobj3 = testlst.getrecipe("test")
+#testobj3 = testlst.getrecipe("test")
 
-print(testobj3.tostring())
-testlst.listrecipes()
+#print(testobj3.tostring())
+#testlst.listrecipes()
+obj = uh.userhandler()
+
+obj.setupnewrecipe()
