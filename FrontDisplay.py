@@ -1,4 +1,8 @@
 import RecipeListdict as rl
+import addrecipe as ar
+
+
+
 
 print("")
 print("  _______ ")
@@ -17,6 +21,10 @@ def commandcheck(userinput):
         print("viewing help")
     elif userinput == "view regex for any exixting things":
         print("viewing picked recipe")
+    elif userinput == "add":
+        addrecipe = ar.addrecipe()
+        addrecipe.setupnewrecipe()
+
     
 
 def isexit(userinput):

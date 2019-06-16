@@ -1,4 +1,9 @@
-#import recipeobject as recipeobject
+
+#todo:
+#add an xml serializer method for all recipe
+import re
+import xml.etree.cElementTree as ET
+
 class recipelistdict(object):
 
     def __init__(self):
@@ -25,6 +30,10 @@ class recipelistdict(object):
         for x in self.dict:
             if x != str():
                 print(x.recipename)
+
+    def savealltoxml(self):
+        for r in self.dict.items():
+            r.savetoxml()
             
 
     class recipe:
@@ -32,6 +41,7 @@ class recipelistdict(object):
             self.RecipeDict = dict()
             self.recipename = str()
             self.subrecipes = list()
+            self.flourweight = int()
 
         def checkhaskey(self,key):
             if key in self.RecipeDict.keys():
@@ -75,3 +85,30 @@ class recipelistdict(object):
             print("___________________________")           
             for key,val in self.RecipeDict.items():
                 print(key, "       ", val,"g")
+
+
+        def setflourweight(self):
+            for key,val in self.RecipeDict.items():
+                if bool(re.search("flour",key)):
+                    self.flourweight = val
+
+        def savetoxml(self):
+
+            root = ET.Element("recipe")
+            for subrecipe in self.subrecipes:
+                newsubdoc = ET.SubElement(root,subrecipe.recipename)
+                for key,val in subrecipe.RecipeDict.items():
+                   ET.SubElement(newsubdoc, key).text = val #cant send val as int must convert to string
+                
+
+            doc = ET.SubElement(root, "main")
+
+            for key,val in self.RecipeDict.items():
+                   ET.SubElement(doc, key).text = val
+
+            tree = ET.ElementTree(root)
+            tree.write("filename.xml")
+            
+
+        def loadfromxml(self):
+            return 0

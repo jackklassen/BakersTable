@@ -3,11 +3,13 @@
 #bug test and add better testable handelers for user inputs
 import RecipeEditor as re
 import RecipeListdict as rl
-class userhandler():
+class addrecipe():
     def __init__(self):
         self.recipes = rl.recipelistdict()
         self.newrecipe = object()
         self.newrecipename = str()
+        self.newsubrecipe = object()
+
     def setupnewrecipe(self):
         self.newrecipe = rl.recipelistdict.recipe()
         #add a check if untitled already exists
@@ -22,39 +24,62 @@ class userhandler():
             elif userinput == "no":
                 self.addtorecipe()
 
-            if userinput == "end": #or any other exit condiciton
+
+            if userinput == "e": #or any other exit condiciton
+                #save the list in a file
                 editingrecipe = False
 
     def addpreferment(self):
         editingpreferment = True
         userinput = ""
-        newsubrecipe = rl.recipelistdict.recipe
+        self.newsubrecipe = rl.recipelistdict.recipe()
+
         prefermentname = "untitled pre ferment" #same process as above for untitiled
-        print("enter the ingredient and ammounts in grams in the command line.")
+        prefermentname = input("enter the subrecipe name.\n")
+        self.newsubrecipe.setrecipename(prefermentname)
+
+        
         while editingpreferment == True:
+            print("enter the ingredient name.")
             userinput = input("")
-            if userinput == "done":
+            
+            if userinput == "e":
                 editingpreferment = False
-        self.handlerecipeadding(prefermentname,userinput)
+                continue
+            self.handlesubrecipeadding(userinput)
         #at the end of the while loop add the subrecipe to recipe
-        self.newrecipe.addsubrecipe(newsubrecipe)
+        self.newrecipe.addsubrecipe(self.newsubrecipe)
 
 
     def addtorecipe(self):
         addingtorecipe = True
         userinput = ""
-        print("enter the ingredient and ammounts in grams in the command line and type view to see the currently added ingredients")
+        
         while addingtorecipe == True:
+            print("enter the ingredient name.")
             userinput = input("")
-            if userinput == "done":
+            
+            if userinput == "e":
+                #save save object into the list
                 addingtorecipe = False
-
-        self.handlerecipeadding(self.newrecipename,userinput)
+                continue
+            self.handlerecipeadding(userinput)
+        
    
 
+    def handlesubrecipeadding(self, userinput):
+        key = userinput
+        value = input("enter the ammount in grams.\n")
+        #tempdata = userinput.split(",")
+        self.newsubrecipe.addtorecipe(key,value)
 
-    def handlerecipeadding(self,recipename,userinput):
-        return 0
+
+    def handlerecipeadding(self, userinput):
+        key = userinput
+        value = input("enter the ammount in grams.\n")
+        #tempdata = userinput.split(",")
+        self.newrecipe.addtorecipe(key,value)
+
         #regex problem
         #ex if no # then not an ingriendt ammount pair but if type 00 flour it is still just an ingredent
         #if recipe name is main recipe handle adding to that if not

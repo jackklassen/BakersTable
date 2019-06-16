@@ -1,6 +1,6 @@
 #import recipeobject as ro
 import RecipeListdict as rl
-import UserHandler as uh
+import addrecipe as uh
 #tester
 
 #recipe = ro.recipe()
@@ -34,6 +34,16 @@ import UserHandler as uh
 
 #print(testobj3.tostring())
 #testlst.listrecipes()
-obj = uh.userhandler()
+#obj = uh.addrecipe()
 
-obj.setupnewrecipe()
+#obj.setupnewrecipe()
+test = rl.recipelistdict.recipe()
+test2 = rl.recipelistdict.recipe()
+test.setrecipename("test")
+test2.setrecipename("test2")
+
+test2.addtorecipe("water","100")
+test.addtorecipe("flour","100")
+test.addsubrecipe(test2)
+test.savetoxml()
+
