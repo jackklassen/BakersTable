@@ -153,7 +153,7 @@ class recipelistdict(object):
 
             tree = ET.ElementTree(root)
            
-            filename = self.recipename + ".xml"
+            filename = "BakersTable-master/recipes"+self.recipename + ".xml"
             tree.write(filename)
             
 

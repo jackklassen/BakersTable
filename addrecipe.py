@@ -17,16 +17,19 @@ class addrecipe():
         self.newrecipe.setrecipename(self.newrecipename)
         editingrecipe = True
         while editingrecipe == True:
-            userinput = input("do you want to add a preferment/subrecipe?\n")
+            userinput = input("do you want to add a preferment/subrecipe? type done when you are finished.\n")
 
             if userinput == "yes":
                 self.addpreferment()
             elif userinput == "no":
                 self.addtorecipe()
-
+            elif userinput == "done":
+                self.newrecipe.savetoxml()
+                editingrecipe = False
 
             if userinput == "e": #or any other exit condiciton
                 #save the list in a file
+                self.newrecipe.savetoxml()
                 editingrecipe = False
 
     def addpreferment(self):

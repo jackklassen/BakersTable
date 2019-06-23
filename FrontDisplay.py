@@ -2,6 +2,8 @@ import RecipeListdict as rl
 import addrecipe as ar
 
 
+recipelist =rl.recipelistdict()
+    
 
 
 print("")
@@ -14,13 +16,14 @@ print(" |____|/  ")
 print("Bakers Table")
 print("=============")
 
+
+
 def commandcheck(userinput):
     if userinput == "view all":
-        print("viewing all")
+        recipelist.loadallfromxml()
+        recipelist.listrecipes()
     elif userinput == "help":
         print("viewing help")
-    elif userinput == "view regex for any exixting things":
-        print("viewing picked recipe")
     elif userinput == "add":
         addrecipe = ar.addrecipe()
         addrecipe.setupnewrecipe()
@@ -42,8 +45,11 @@ def isexit(userinput):
      return False
     
 
-userinput = str()
 
-while isexit(userinput) == False:
-    userinput = input("Enter your command: ")
-    commandcheck(userinput)
+def maindisplay():
+    userinput = str()
+    while isexit(userinput) == False:
+        userinput = input("Enter your command: ")
+        commandcheck(userinput)
+
+maindisplay()
