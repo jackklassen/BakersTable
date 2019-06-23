@@ -1,4 +1,5 @@
 #import recipeobject as ro
+import os
 import RecipeListdict as rl
 import addrecipe as uh
 import untangle as ut
@@ -62,30 +63,47 @@ import untangle as ut
     #        print(ingredient['name'])
    #         print(ingredient.cdata)
             
-testrec = rl.recipelistdict.recipe()
+#testrec = rl.recipelistdict.recipe()
 
-testrec.loadfromxml("test.xml")
+#testrec.loadfromxml("test.xml")
 #print(testrec.RecipeDict)
-testrec.tostring()
+#testrec.tostring()
 
 #print(obj.recipe.subrecipe)
 
 #print(obj.recipe.subrecipe)
 
-parser = ut.parse("test.xml")
-print(parser.recipe['recipename'])
-if 'subrecipe' in dir(parser.recipe):
-    for subrecipe in parser.recipe.subrecipe:
+#parser = ut.parse("test.xml")
+#print(parser.recipe['recipename'])
+#if 'subrecipe' in dir(parser.recipe):
+  #  for subrecipe in parser.recipe.subrecipe:
                 
                    #############subrecipe processing#############
        
 
-        if subrecipe.get_attribute('subrecipename'):
-            print(subrecipe['subrecipename'])
-        for ingredient in subrecipe.ingredient:
-               print(ingredient['name'],ingredient.cdata)
+   #     if subrecipe.get_attribute('subrecipename'):
+  #          print(subrecipe['subrecipename'])
+   #     for ingredient in subrecipe.ingredient:
+   #            print(ingredient['name'],ingredient.cdata)
         #
                    #############/subrecipe processing#############
 
-for ingredient in parser.recipe.main.ingredient:
-    print(ingredient['name'],ingredient.cdata)
+#for ingredient in parser.recipe.main.ingredient:
+   # print(ingredient['name'],ingredient.cdata)
+listicle= rl.recipelistdict()
+
+
+listicle.loadallfromxml()
+
+#listicle.getrecipe("test").setflourweight()
+
+#listicle.listrecipes()
+recipe = rl.recipelistdict.recipe()
+#recipe.loadfromxml("BakersTable-master/recipes/test.xml")
+#recipe.setflourweight()
+#recipe.tostring()
+
+listicle.getrecipe("test").tostring()
+listicle.getrecipe("test").multiplyrecipe(0.5)
+listicle.getrecipe("test").tostring()
+

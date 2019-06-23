@@ -1,9 +1,10 @@
 
-#todo:
-#add an xml serializer method for all recipe
+
+import os
 import re
 import untangle
 import xml.etree.cElementTree as ET
+
 
 class recipelistdict(object):
 
@@ -13,7 +14,7 @@ class recipelistdict(object):
     def addrecipe(self,recipe):
         string = recipe.recipename
         self.dict[string] = recipe
-        print(self.dict[string])
+        #print(self.dict[string])
         #read
     def getrecipe(self,recipename):
         return self.dict.get(recipename,"no recipe found.")
@@ -27,10 +28,10 @@ class recipelistdict(object):
         recipe = self.getrecipe(recipename)
         self.dict.pop(recipe)
 
+    ##List all names of Recipes in the recipe list
     def listrecipes(self):
-        for x in self.dict:
-            if x != str():
-                print(x.recipename)
+        for key,val in self.dict.items():
+            print(val.recipename)
 
 
     def savealltoxml(self):
@@ -38,15 +39,25 @@ class recipelistdict(object):
             r.savetoxml()
     
     def loadallfromxml(self):
-        #https://stackoverflow.com/questions/3964681/find-all-files-in-a-directory-with-extension-txt-in-python
-        return 0
+        path = "BakersTable-master/recipes"
+        files = []
+        for r, d, f in os.walk(path):
+            for file in f:
+                if '.xml' in file:
+                    files.append(os.path.join(r, file))
+
+        for f in files:
+            newrecipe = recipelistdict.recipe()
+            newrecipe.loadfromxml(f)
+            self.addrecipe(newrecipe)
+        
 
     class recipe:
         def __init__(self):
             self.RecipeDict = dict()
             self.recipename = str()
             self.subrecipes = list()
-            self.flourweight = int()
+            self.flourweight = 0
 
         def checkhaskey(self,key):
             if key in self.RecipeDict.keys():
@@ -85,24 +96,45 @@ class recipelistdict(object):
             return self.recipename
 
         def tostring(self):
-            #self.setflourweight()
-            self.flourweight = 200
+            #self.flourweight = 200
             for sub in self.subrecipes:
+                sub.flourweight = self.flourweight
                 sub.tostring()
             print("\n")
             print(self.recipename)
             print("___________________________")           
             for key,val in self.RecipeDict.items():
-                bakerspercent= (int(val) / self.flourweight)
-                
+                if(self.flourweight != 0): 
+                    bakerspercent = (int(val) / self.flourweight)
+                else:
+                    bakerspercent = 0
                 print(key, "       ", val,"g","    ","{:.2%}".format(bakerspercent))
 
 
         def setflourweight(self):
+            for subrecipe in self.subrecipes:
+                subrecipe.setflourweight()
             for key,val in self.RecipeDict.items():
-                if bool(re.search("flour",key)):
-                    self.flourweight = val
+                if "flour" in key:
+                    self.flourweight += int(val)
+                    
 
+#################### Handle ALtering the recipe by dividing or multipying it ####################
+        def multiplyrecipe(self,multivalue):
+            for subrecipe in self.subrecipes:
+                subrecipe.multiplyrecipe(multivalue)
+            for key,val in self.RecipeDict.items():
+                self.RecipeDict[key] = (int(val) * multivalue)
+
+        def dividerecipe(self,dividevalue):
+            for subrecipe in self.subrecipes:
+                subrecipe.dividerecipe(dividevalue)
+            for key,val in self.RecipeDict.items():
+                 self.RecipeDict[key] = (int(val)/ dividevalue)
+#################### /Handle ALtering the recipe by dividing or multipying it ####################
+
+
+################################### XML Proccessing ###################################
         def savetoxml(self):
 
             root = ET.Element("recipe",attrib={"recipename":self.recipename})
@@ -147,8 +179,4 @@ class recipelistdict(object):
 
             for ingredient in parser.recipe.main.ingredient:
                 self.addtorecipe(ingredient['name'],ingredient.cdata)
-
-               
-                        
-
-            return 0
+            ################################### XML Proccessing ###################################
