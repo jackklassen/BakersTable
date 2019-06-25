@@ -73,7 +73,10 @@ class recipelistdict(object):
                 return False
 
         def addtorecipe(self,key, value):
-            self.RecipeDict[key] = value
+            if self.isnumber(value):
+                self.RecipeDict[key] = value
+            else:
+                return False
 
         def readfromrecipe(self,key):
             return self.RecipeDict[key]
@@ -96,27 +99,45 @@ class recipelistdict(object):
             return self.recipename
 
         def tostring(self):
+            self.setflourweight()
+            self.tostringrecursive()
+
+
+        def tostringrecursive(self): ## the recursive part of tostring
             #self.flourweight = 200
             for sub in self.subrecipes:
                 sub.flourweight = self.flourweight
-                sub.tostring()
+                sub.tostringrecursive()
             print("\n")
             print(self.recipename)
             print("___________________________")           
             for key,val in self.RecipeDict.items():
-                if(self.flourweight != 0): 
-                    bakerspercent = (int(val) / self.flourweight)
+                if self.isnumber(val):
+                    if(self.flourweight != 0): 
+                        bakerspercent = (int(val) / self.flourweight)
+                    else:
+                        bakerspercent = 0
+                    print(key, "       ", val,"g","    ","{:.2%}".format(bakerspercent))
                 else:
-                    bakerspercent = 0
-                print(key, "       ", val,"g","    ","{:.2%}".format(bakerspercent))
+                    return False
 
 
+    #sets the total weigt of the flour in a recipe to use in a bakers prcentage
         def setflourweight(self):
             for subrecipe in self.subrecipes:
                 subrecipe.setflourweight()
             for key,val in self.RecipeDict.items():
-                if "flour" in key:
+                if "flour" in key.lower():
                     self.flourweight += int(val)
+                    
+
+        def isnumber(self,input):
+            try:
+                float(input)
+                return True
+            except ValueError:
+                return False
+
                     
 
 #################### Handle ALtering the recipe by dividing or multipying it ####################

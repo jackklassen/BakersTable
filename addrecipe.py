@@ -19,17 +19,19 @@ class addrecipe():
         while editingrecipe == True:
             userinput = input("do you want to add a preferment/subrecipe? type done when you are finished.\n")
 
+
             if userinput == "yes":
                 self.addpreferment()
             elif userinput == "no":
                 self.addtorecipe()
+
             elif userinput == "done":
-                self.newrecipe.savetoxml()
+                self.saverecipe()
                 editingrecipe = False
 
             if userinput == "e": #or any other exit condiciton
                 #save the list in a file
-                self.newrecipe.savetoxml()
+                self.saverecipe()
                 editingrecipe = False
 
     def addpreferment(self):
@@ -81,16 +83,9 @@ class addrecipe():
         key = userinput
         value = input("enter the ammount in grams.\n")
         #tempdata = userinput.split(",")
-        self.newrecipe.addtorecipe(key,value)
+        return self.newrecipe.addtorecipe(key,value)
 
-        #regex problem
-        #ex if no # then not an ingriendt ammount pair but if type 00 flour it is still just an ingredent
-        #if recipe name is main recipe handle adding to that if not
-        #add to subrecipe with the the recipename given
-        #if userinput is ingrident amount split and add as key and value
-        #if userinput is just ingredient then add as 0g and prompt the user to add and ammount
-
-    #check if a untitled name alrady exist if yes return a new untitled name
+        
     def checkuntitledname(self,givenlist):
         outputname = "untitled"
         addednumber = 1
@@ -99,3 +94,10 @@ class addrecipe():
                 outputname = outputname+addednumber
                 addednumber = addednumber + 1
         return outputname
+
+    def saverecipe(self):
+        inputname = input("Name of new recipe: ")
+        self.newrecipe.setrecipename(inputname)
+        self.newrecipe.savetoxml()
+        print("recipe " + self.newrecipe.recipename+ " saved.")
+        

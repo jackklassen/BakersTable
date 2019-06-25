@@ -98,12 +98,8 @@ listicle.loadallfromxml()
 #listicle.getrecipe("test").setflourweight()
 
 #listicle.listrecipes()
-recipe = rl.recipelistdict.recipe()
-#recipe.loadfromxml("BakersTable-master/recipes/test.xml")
-#recipe.setflourweight()
-#recipe.tostring()
 
-listicle.getrecipe("test").tostring()
-listicle.getrecipe("test").multiplyrecipe(0.5)
-listicle.getrecipe("test").tostring()
+print(0/5)
 
+recipe = listicle.getrecipe("test")
+recipe.tostring()

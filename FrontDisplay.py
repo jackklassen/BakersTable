@@ -3,6 +3,8 @@ import addrecipe as ar
 
 
 recipelist =rl.recipelistdict()
+recipelist.loadallfromxml()
+viewedrecipe = rl.recipelistdict.recipe()
     
 
 
@@ -19,30 +21,51 @@ print("=============")
 
 
 def commandcheck(userinput):
-    if userinput == "view all":
-        recipelist.loadallfromxml()
-        recipelist.listrecipes()
-    elif userinput == "help":
-        print("viewing help")
-    elif userinput == "add":
-        addrecipe = ar.addrecipe()
-        addrecipe.setupnewrecipe()
+    HandleCommand = {
+        "view all":ViewAll,
+        "help":ViewHelp,
+        "add": AddRecipeFront,
+        "view":ViewRecipe,
+        "multiply": multiplyrecipefront,
+        "divide": dividerecipefront
+    }.get(userinput.lower(),default)()
 
+def ViewAll():
+     recipelist.listrecipes()
+
+def ViewHelp():
+    print("viewing help")
+
+def AddRecipeFront():
+    addrecipe = ar.addrecipe()
+    addrecipe.setupnewrecipe()
+
+def ViewRecipe():
+    newinput = input("Name the Recipe to view: ")
+    viewedrecipe = recipelist.getrecipe(newinput)
+    print(viewedrecipe.tostring())
+
+def multiplyrecipefront():
+        newinput = input("Multiply the recipe by what ammount: ")
+        viewedrecipe.multiplyrecipe(newinput)
+
+def dividerecipefront():
+    newinput = input("Multiply the recipe by what ammount: ")
+    viewedrecipe.dividerecipe(newinput)
     
+def default():
+    print("")
 
 def isexit(userinput):
-    if userinput == "exit":
-        return True
-    elif  userinput == "Exit":
-            return True
-    elif  userinput == "EXIT":
-        return True
-    elif  userinput == "E":
-        return True
-    elif  userinput == "e":
-        return True
-    else:
-     return False
+    isexit={
+        "exit": True,
+        "Exit": True,
+        "EXIT": True,
+        "E": True,
+        "e": True
+        }
+    return isexit.get(userinput,False)
+    
     
 
 
