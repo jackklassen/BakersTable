@@ -39,7 +39,7 @@ class recipelistdict(object):
             r.savetoxml()
     
     def loadallfromxml(self):
-        path = "BakersTable-master/recipes"
+        path = "BakersTable/recipes"
         files = []
         for r, d, f in os.walk(path):
             for file in f:
