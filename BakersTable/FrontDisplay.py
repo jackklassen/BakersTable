@@ -40,17 +40,21 @@ def AddRecipeFront():
     addrecipe = ar.addrecipe()
     addrecipe.setupnewrecipe()
 
-def ViewRecipe():
-    newinput = input("Name the Recipe to view: ")
+def ViewRecipe(newinput = "none"):
+    if newinput == "none":
+        newinput = input("Name the Recipe to view: ")
     viewedrecipe = recipelist.getrecipe(newinput)
     print(viewedrecipe.tostring())
 
-def multiplyrecipefront():
-        newinput = input("Multiply the recipe by what ammount: ")
+
+def multiplyrecipefront(newinput = "none"):
+        if newinput == "none":
+                newinput = input("Multiply the recipe by what ammount: ")
         viewedrecipe.multiplyrecipe(newinput)
 
-def dividerecipefront():
-    newinput = input("Multiply the recipe by what ammount: ")
+def dividerecipefront(newinput = "none"):
+    if newinput == "none":
+        newinput = input("Multiply the recipe by what ammount: ")
     viewedrecipe.dividerecipe(newinput)
     
 def default():
