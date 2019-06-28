@@ -1,9 +1,0 @@
-<recipe recipename="meme">
-	<subrecipe subrecipename="tememest2">
-		<ingredient name="water">100</ingredient>
-	</subrecipe>
-	<subrecipe subrecipename="memem">
-		<ingredient name="water">100</ingredient>
-</subrecipe>
-<main>
-	<ingredient name="flour">100</ingredient></main></recipe>

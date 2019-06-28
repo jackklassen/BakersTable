@@ -48,7 +48,7 @@ class addrecipe():
             print("enter the ingredient name.")
             userinput = input("")
             
-            if userinput == "e":
+            if userinput == "done":
                 editingpreferment = False
                 continue
             self.handlesubrecipeadding(userinput)
@@ -64,7 +64,7 @@ class addrecipe():
             print("enter the ingredient name.")
             userinput = input("")
             
-            if userinput == "e":
+            if userinput == "done":
                 #save save object into the list
                 addingtorecipe = False
                 continue

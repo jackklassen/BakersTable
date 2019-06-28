@@ -173,8 +173,11 @@ class recipelistdict(object):
                    ET.SubElement(doc,"ingredient",attrib={"name":key}).text = val
 
             tree = ET.ElementTree(root)
-           
-            filename = "BakersTable-master/recipes"+self.recipename + ".xml"
+
+            trimedrecipename = self.recipename.strip()
+            finalizedrecipename = self.recipename.replace(" ","_")
+
+            filename = "BakersTable/recipes/"+finalizedrecipename+ ".xml"
             tree.write(filename)
             
 

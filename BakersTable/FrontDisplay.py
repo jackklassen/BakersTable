@@ -79,9 +79,10 @@ class FrontDisplay():
                 "Exit": True,
                 "EXIT": True,
                 "E": True,
-                "e": True
+                "e": True,
+                "done": True
                 }
-                return isexit.get(userinput,False)
+                return isexit.get(userinput.lower(),False)
     
     
 
