@@ -1,0 +1,9 @@
+Bakers Table: A python based bread baking table.
+
+commands:
+all commands are NOT case senstive.
+
+h, help: display help.txt
+a, and: add a new recipe
+va, view all,viewall: view all recipes stored on this computer
+v, view: display a specific recipe

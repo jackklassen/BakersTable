@@ -24,18 +24,28 @@ class FrontDisplay():
         def commandcheck(self,userinput):
                 HandleCommand = {
                 "view all":self.ViewAll,
+                "viewall":self.ViewAll,
+                "va":self.ViewAll,
                 "help":self.ViewHelp,
+                "h": self.ViewHelp,
                 "add": self.AddRecipeFront,
+                "a":self.AddRecipeFront,
                 "view":self.ViewRecipe,
+                "v":self.ViewRecipe,
                 "multiply": self.multiplyrecipefront,
-                "divide": self.dividerecipefront
+                "m": self.multiplyrecipefront,
+                "divide": self.dividerecipefront,
+                "d": self.dividerecipefront
                 }.get(userinput.lower(),self.default)()
 
         def ViewAll(self):
                 self.recipelist.listrecipes()
 
-        def ViewHelp(self):
-                print("viewing help")
+        def ViewHelp(self): ##handle exeption
+                f = open('BakersTable/BakersTable/help.txt', 'r')
+                file_contents = f.read()
+                print (file_contents)
+                f.close()
 
         def AddRecipeFront(self):
                 addrecipe = ar.addrecipe()
@@ -76,9 +86,6 @@ class FrontDisplay():
         def isexit(self,userinput):
                 isexit={
                 "exit": True,
-                "Exit": True,
-                "EXIT": True,
-                "E": True,
                 "e": True,
                 "done": True
                 }
@@ -93,4 +100,3 @@ class FrontDisplay():
                         userinput = input("Enter your command: ")
                         self.commandcheck(userinput)
 
-#maindisplay()

@@ -1,6 +1,4 @@
-#handle creating adding and editing the recipes
 
-#have a way to check for preferments and see if the user wants to edit them
 import RecipeListdict as rl
 class recipeeditor():
         def __init__(self):
