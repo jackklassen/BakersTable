@@ -39,7 +39,8 @@ class FrontDisplay():
                 }.get(userinput.lower(),self.default)()
 
         def ViewAll(self):
-                self.recipelist.listrecipes()
+                self.recipelist.listrecipes() 
+                ##not showing all recipes
 
         def ViewHelp(self): ##handle exeption
                 f = open('BakersTable/BakersTable/help.txt', 'r')
@@ -55,9 +56,9 @@ class FrontDisplay():
                 if newinput == "none":
                         newinput = input("Name the Recipe to view: ")
                         
-
+                self.setviewedrecipe(newinput)
                 self.viewedrecipe.tostring()
-               
+               #handle exection if recipe not found
 
         def setviewedrecipe(self,newinput = "none"):
                 if newinput == "none":

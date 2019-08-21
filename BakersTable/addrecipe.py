@@ -18,6 +18,8 @@ class addrecipe():
         editingrecipe = True
         while editingrecipe == True:
             userinput = input("do you want to add a preferment/subrecipe? type done when you are finished.\n")
+            ##add better instructions
+            ##allow better leave conditions ex e or exit
 
 
             if userinput == "yes":
@@ -75,14 +77,12 @@ class addrecipe():
     def handlesubrecipeadding(self, userinput):
         key = userinput
         value = input("enter the ammount in grams.\n")
-        #tempdata = userinput.split(",")
         self.newsubrecipe.addtorecipe(key,value)
 
 
     def handlerecipeadding(self, userinput):
         key = userinput
         value = input("enter the ammount in grams.\n")
-        #tempdata = userinput.split(",")
         return self.newrecipe.addtorecipe(key,value)
 
         
@@ -90,7 +90,7 @@ class addrecipe():
         outputname = "untitled"
         addednumber = 1
         for x in givenlist:
-            if x.recipename == outputname:# untitled or untitled(n) add a new
+            if x.recipename == outputname: # untitled or untitled(n) add a new
                 outputname = outputname+addednumber
                 addednumber = addednumber + 1
         return outputname

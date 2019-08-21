@@ -1,0 +1,10 @@
+<recipe recipename="newtestbread">
+   <subrecipe subrecipename="levain">
+      <ingredient name="water">100</ingredient>
+      <ingredient name="flour">100</ingredient>
+   </subrecipe>
+   <main>
+      <ingredient name="water">100</ingredient>
+   </main>
+</recipe>
+

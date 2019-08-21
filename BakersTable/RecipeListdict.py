@@ -104,26 +104,28 @@ class recipelistdict(object):
 
 
         def tostringrecursive(self): ## the recursive part of tostring
-            #self.flourweight = 200
             for sub in self.subrecipes:
-                sub.flourweight = self.flourweight
-                sub.tostringrecursive()
+                sub.flourweight = self.flourweight #set the flour weight of sub recipe to the flour weight of the top recipe
+                sub.tostringrecursive() #call the tostring method for the sub recipe
+                
             print("\n")
             print(self.recipename)
-            print("___________________________")           
+            print("___________________________") 
+                    
             for key,val in self.RecipeDict.items():
-                if self.isnumber(val):
-                    if(self.flourweight != 0): 
+               
+                if self.isnumber(val): #if the ingerident has a weight
+                    if(self.flourweight != 0): #if the weight isnt 0
                         bakerspercent = (int(val) / self.flourweight)
                     else:
                         bakerspercent = 0
-                    print(key, "       ", val,"g","    ","{:.2%}".format(bakerspercent))
+                    print(key, "       ", val,"g","    ","{:.2%}".format(bakerspercent)) #print the name of ingredent, the weight in grams and the percentage
                 else:
                     return False
 
 
     #sets the total weigt of the flour in a recipe to use in a bakers prcentage
-        def setflourweight(self):
+        def setflourweight(self): #deal with flour weight from preferment
             for subrecipe in self.subrecipes:
                 subrecipe.setflourweight()
             for key,val in self.RecipeDict.items():
@@ -157,14 +159,14 @@ class recipelistdict(object):
 
 ################################### XML Proccessing ###################################
         def savetoxml(self):
-
+            ##sub recipe saving wrong saves like <ingreident "water" = 100> normal recipe saves good
             root = ET.Element("recipe",attrib={"recipename":self.recipename})
            
             for subrecipe in self.subrecipes:
                 newsubdoc = ET.SubElement(root,"subrecipe",attrib={"subrecipename":subrecipe.recipename})
                
                 for key,val in subrecipe.RecipeDict.items():
-                   ET.SubElement(newsubdoc,"ingredient",attrib={key:val}).text #cant send val as int must convert to string
+                   ET.SubElement(newsubdoc,"ingredient",attrib={"name":key}).text = val #cant send val as int must convert to string
                 
 
             doc = ET.SubElement(root, "main")
